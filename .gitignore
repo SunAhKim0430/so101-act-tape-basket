@@ -1,0 +1,8 @@
+# recordings, merged datasets, training outputs and downloaded models stay local
+datasets/
+outputs/
+so101_models/
+*.zip
+scripts/camera_check/
+__pycache__/
+*.pyc
