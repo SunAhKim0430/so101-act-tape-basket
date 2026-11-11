@@ -29,7 +29,7 @@
 
 ### 정지 프레임 비율(`idle fraction`)이 높음
 - 대부분 에피소드 시작 직후입니다. `Recording episode` 줄이 뜨면 바로 움직이고, 작업이 끝나면 바로 `n`을 누릅니다. 가만히 있는 구간도 그대로 학습돼서, 실행할 때 처음에 머뭇거리거나 출발하지 않을 수 있습니다.
-- 참고: 첫 시도(실패)는 10fps로 60초를 꽉 채워 녹화해서 65%, 이번(성공)은 22~25%.
+- 참고: 첫 시도(실패)는 10fps로 60초를 꽉 채워 녹화해서 65%, 이번(성공)은 22\~25%.
 
 ### 녹화 도중 카메라가 움직임
 - `python scripts/cam_shift.py datasets/incoming`으로 세션끼리 화면이 얼마나 밀렸는지(px) 봅니다. 15px 넘게 차이 나면 카메라가 움직인 것입니다.
@@ -46,7 +46,7 @@
 - 반복되면: 팔로워 전원 어댑터, 해당 모터(id 5 = wrist_roll) 앞뒤 케이블을 다시 꽂기, USB 다시 꽂기, 녹화·조종 창이 열려 있으면 닫기 → `1_check.bat robot`으로 모터 6개 응답 확인
 
 ### 동작이 1초마다 멈칫거림
-- 모델이 다음 동작을 계산하는 동안(CPU 0.1~0.25초) 제어가 멈추기 때문입니다. `n_action_steps`를 chunk 크기까지 올립니다 (`5_rollout.bat <모델> 100`). [4-4](4_rollout.md#4-4-동작을-부드럽게-하기)
+- 모델이 다음 동작을 계산하는 동안(CPU 0.1\~0.25초) 제어가 멈추기 때문입니다. `n_action_steps`를 chunk 크기까지 올립니다 (`5_rollout.bat <모델> 100`). [4-4](4_rollout.md#4-4-동작을-부드럽게-하기)
 
 ### `No accelerated backend detected` / `Device 'cuda' is not available. Switching to 'cpu'`
 - GPU가 없는 노트북에서는 정상입니다. 모델은 CPU로 돕니다.

@@ -29,7 +29,7 @@ rollout은 학습이 아닙니다. 실행해도 모델은 바뀌지 않습니다
 4. 진행: 모델 점검(`[OK] model fits the rollout settings`) → `Press Enter to start` → Enter → 팔로워·카메라 연결 → 40초 동안 모델이 움직임 → 시작할 때 자세로 천천히 돌아간 뒤 **토크가 꺼져 팔에 힘이 빠짐**
 5. 일찍 멈추기: Ctrl+C → 시작 자세로 돌아간 뒤 멈춤 ("일괄 작업을 끝내시겠습니까"에는 Y). **비상시에는 팔로워 전원 어댑터를 뽑습니다.**
 
-`5_rollout.bat`이 실행 전에 `check_model.py`로 확인하는 것: 모델 파일이 다 있는지(덜 받은 파일 포함), 모델이 학습한 카메라 이름과 `config.bat`의 카메라가 같은지, `n_action_steps`가 1~chunk_size인지.
+`5_rollout.bat`이 실행 전에 `check_model.py`로 확인하는 것: 모델 파일이 다 있는지(덜 받은 파일 포함), 모델이 학습한 카메라 이름과 `config.bat`의 카메라가 같은지, `n_action_steps`가 1\~chunk_size인지.
 
 처음 실행할 때 ResNet18 가중치(45MB)를 인터넷에서 한 번 받습니다.
 
@@ -44,13 +44,13 @@ rollout은 학습이 아닙니다. 실행해도 모델은 바뀌지 않습니다
 
 ## 4-4. 동작을 부드럽게 하기
 
-`lerobot-rollout`은 모델이 다음 동작들을 계산하는 동안 팔 제어를 멈춥니다. CPU에서는 한 번 계산에 0.1~0.25초가 걸려서(서버 CPU 측정, 스레드 8/4/2개 = 86/136/237ms) 30fps 기준 3~7스텝 동안 팔이 멈춥니다.
+`lerobot-rollout`은 모델이 다음 동작들을 계산하는 동안 팔 제어를 멈춥니다. CPU에서는 한 번 계산에 0.1\~0.25초가 걸려서(서버 CPU 측정, 스레드 8/4/2개 = 86/136/237ms) 30fps 기준 3\~7스텝 동안 팔이 멈춥니다.
 
 | 방법 | 효과 | 비고 |
 |---|---|---|
 | `n_action_steps`를 chunk_size까지 (c100 → `100`) | 멈칫이 3.3초에 한 번 | **시연 성공 설정.** 대신 중간에 상황이 바뀌어도 늦게 반응 |
 | `n_action_steps` 30 | 1초마다 멈칫 | 반응은 빠름 |
-| ACT temporal ensembling (`--policy.temporal_ensemble_coeff=0.01 --policy.n_action_steps=1`) | 가장 부드러움 | 매 스텝 예측 → CPU로는 3~7배 느려져서 안 씀. GPU 있는 PC라면 시도해 볼 만함 |
+| ACT temporal ensembling (`--policy.temporal_ensemble_coeff=0.01 --policy.n_action_steps=1`) | 가장 부드러움 | 매 스텝 예측 → CPU로는 3\~7배 느려져서 안 씀. GPU 있는 PC라면 시도해 볼 만함 |
 
 터미널에 `Record loop is running slower (… Hz)` 경고가 예측할 때마다 한 번씩 나오는 것은 이 멈춤 때문입니다. 계속 나오면 `ROLLOUT_DISPLAY=false`.
 
